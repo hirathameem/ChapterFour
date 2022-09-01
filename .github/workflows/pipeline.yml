@@ -1,18 +1,18 @@
 name: Pipeline
-on: push
+on: [push]
 env:
   APPLICATION_NAME: app2
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v2
+      - uses: action/checkout@v3
       - name: Setup Python environment
-        uses: action/setup-python@v1.1.1
+        uses: action/setup-python@v4
       - name: Install requirements
         run: pip install --quiet --requirement requirements.txt
       - name: Lint code
-        run:  |
+        run: |
           flake8 --ignore=E501, E231 *.py
           pylint --disable=C0301 --disable=C0326 *.py
       - name: Run unit tests
